@@ -9,6 +9,7 @@ interface Props {
 const Separator = ({ isHorizontal, size }: Props) => <View style={isHorizontal ? { width: size } : { height: size }} />;
 
 Separator.defaultProps = {
+  isHorizontal: false,
   size: 10,
 };
 

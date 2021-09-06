@@ -1,14 +1,14 @@
-import React, {ReactNode} from 'react';
-import {Text} from 'react-native';
-import {IS_ANDROID} from '../../utils/constants';
+import React, { ReactNode } from 'react';
+import { Text } from 'react-native';
+import { IS_ANDROID } from '../../utils/constants';
 
 interface Props {
   align: 'left' | 'center' | 'right' | 'justify';
   children: ReactNode;
   color: string;
+  numberOfLines?: number;
   size: number;
   space: number;
-  //variant?: 'bold' | 'italic' | 'medium' | 'regular';
   variant?: keyof typeof fontVariant;
 }
 
@@ -35,13 +35,17 @@ const getTextStyle = ({
 };
 
 const spaceLetters = (text: any, space: number) => {
-  return text.split('').join('\u200A'.repeat(space));
+  if (typeof text === 'string') {
+    return text.split('').join('\u200A'.repeat(space));
+  } else {
+    return text;
+  }
 };
 
-const CustomText = ({align, children, color, size, space, variant}: Props) => {
-  const textStyle = getTextStyle({align, color, size, variant});
+const CustomText = ({ align, children, color, numberOfLines, size, space, variant }: Props) => {
+  const textStyle = getTextStyle({ align, color, size, variant });
   return (
-    <Text allowFontScaling={false} style={textStyle}>
+    <Text allowFontScaling={false} style={textStyle} numberOfLines={numberOfLines}>
       {spaceLetters(children, space)}
     </Text>
   );
@@ -50,7 +54,7 @@ const CustomText = ({align, children, color, size, space, variant}: Props) => {
 CustomText.defaultProps = {
   align: 'left',
   color: 'black',
-  size: 32,
+  size: 20,
   space: 0,
   variant: 'regular',
 };

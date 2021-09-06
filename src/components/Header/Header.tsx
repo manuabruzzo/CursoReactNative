@@ -1,9 +1,10 @@
 import React from 'react';
-import {SafeAreaView, TouchableOpacity, View} from 'react-native';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import {goBack} from '../../navigation/controls';
+import { TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import {colors} from '../../utils/theme';
+import { goBack } from '../../navigation/controls';
+import { colors } from '../../utils/theme';
 import CustomText from '../CustomText';
 import Separator from '../Separator';
 import styles from './styles';
@@ -16,39 +17,25 @@ interface Props {
   title: string;
 }
 
-const Header = ({
-  onPressBackButton,
-  onPressRightButton,
-  RightSideComponent,
-  showBackButton,
-  title,
-}: Props) => {
+const Header = ({ onPressBackButton, onPressRightButton, RightSideComponent, showBackButton, title }: Props) => {
   return (
     <>
-      <SafeAreaView />
+      <SafeAreaView edges={['top']} />
       <View style={styles.mainContainer}>
         {showBackButton ? (
-          <TouchableOpacity
-            onPress={onPressBackButton}
-            style={styles.sideButtonContainer}>
-            <MaterialIcon
-              name="navigate-before"
-              size={35}
-              color={colors.black}
-            />
+          <TouchableOpacity onPress={onPressBackButton} style={styles.sideButtonContainer}>
+            <MaterialIcon name="navigate-before" size={35} color={colors.black} />
           </TouchableOpacity>
         ) : (
           <Separator isHorizontal size={40} />
         )}
         <View style={styles.titleContainer}>
-          <CustomText variant="bold" size={17}>
+          <CustomText align="center" numberOfLines={2} variant="bold" size={17}>
             {title}
           </CustomText>
         </View>
         {RightSideComponent ? (
-          <TouchableOpacity
-            onPress={onPressRightButton}
-            style={styles.sideButtonContainer}>
+          <TouchableOpacity onPress={onPressRightButton} style={styles.sideButtonContainer}>
             <RightSideComponent />
           </TouchableOpacity>
         ) : (

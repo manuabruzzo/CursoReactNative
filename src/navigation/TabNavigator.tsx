@@ -5,7 +5,8 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 import { HistoryScreen } from '../screens';
 import { colors } from '../utils/theme';
-import HomeStack from './HomeStack';
+import BookStack from './BookStack';
+import CharacterStack from './CharacterStack';
 
 type Route = RouteProp<Record<string, object | undefined>, string>;
 const Tab = createBottomTabNavigator();
@@ -13,8 +14,11 @@ const Tab = createBottomTabNavigator();
 const getIconName = (routeName: string) => {
   let iconName = '';
   switch (routeName) {
-    case 'HomeTab':
-      iconName = 'home';
+    case 'BookTab':
+      iconName = 'book';
+      break;
+    case 'CharacterTab':
+      iconName = 'person';
       break;
     case 'HistoryTab':
       iconName = 'history';
@@ -44,7 +48,8 @@ const navigatorScreenOptions = ({ route }: { route: Route }) => ({
 const TabNavigator = () => {
   return (
     <Tab.Navigator screenOptions={navigatorScreenOptions}>
-      <Tab.Screen name="HomeTab" component={HomeStack} options={{ title: 'Home' }} />
+      <Tab.Screen name="BookTab" component={BookStack} options={{ title: 'Books' }} />
+      <Tab.Screen name="CharacterTab" component={CharacterStack} options={{ title: 'Characters' }} />
       <Tab.Screen name="HistoryTab" component={HistoryScreen} options={{ title: 'History' }} />
     </Tab.Navigator>
   );

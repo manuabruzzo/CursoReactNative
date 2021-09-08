@@ -1,10 +1,10 @@
-import { bookDetailEndpoint, booksEndpoint } from './endpoints';
+import { characterDetailEndpoint, charactersEndpoint } from './endpoints';
 
-export const getAllBooks = async () => {
+export const getAllCharacters = async () => {
   try {
     let serviceResponse;
 
-    const response = await fetch(booksEndpoint);
+    const response = await fetch(charactersEndpoint);
     const parsedResponse = await response.json();
 
     if (response.status === 200) {
@@ -14,7 +14,7 @@ export const getAllBooks = async () => {
     }
     return serviceResponse;
   } catch (error) {
-    console.log('Error fetching all books: ', error);
+    console.log('Error fetching all characters: ', error);
     return {
       success: false,
       data: error,
@@ -22,11 +22,11 @@ export const getAllBooks = async () => {
   }
 };
 
-export const getBookById = async (id: number) => {
+export const getCharacterById = async (id: number) => {
   try {
     let serviceResponse;
 
-    const response = await fetch(bookDetailEndpoint(id));
+    const response = await fetch(characterDetailEndpoint(id));
     const parsedResponse = await response.json();
 
     if (response.status === 200) {
@@ -36,9 +36,9 @@ export const getBookById = async (id: number) => {
     }
     return serviceResponse;
   } catch (error) {
-    console.log(`Error fetching book id ${id} details`, error);
+    console.log(`Error fetching character id ${id} details `, error);
     return {
-      succes: false,
+      success: false,
       data: error,
     };
   }

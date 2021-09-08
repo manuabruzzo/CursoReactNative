@@ -3,58 +3,58 @@ import { Alert, FlatList, TouchableOpacity, View } from 'react-native';
 import { useNetInfo } from '@react-native-community/netinfo';
 
 import { goToScreen } from '../../navigation/controls';
-import { CustomText, DefaultButton, Header, Separator } from '../../components';
+import { CustomText, Header, Separator } from '../../components';
 import styles from './styles';
-import { getAllBooks } from '../../services';
+import { getAllCharacters } from '../../services';
+import { Character } from '../../types/Character';
 
-const goToExperimentalScreen = () => {
-  goToScreen('Experimental');
-};
-
-const ListItem = ({ id, title }: { id: number; title: string }) => {
+const ListItem = ({ id, name }: { id: number; name: string }) => {
   return (
-    <TouchableOpacity onPress={() => goToScreen('BookDetails', { id, title })} style={styles.listItemContainerShadow}>
+    <TouchableOpacity
+      onPress={() => goToScreen('CharacterDetails', { id, name })}
+      style={styles.listItemContainerShadow}
+    >
       <View style={styles.listItemContainer}>
         <CustomText numberOfLines={2} size={16} align="center">
-          {title}
+          {name}
         </CustomText>
       </View>
     </TouchableOpacity>
   );
 };
 
-const flatlistKeyExtractor = (item: Book) => `${item.id}`;
+const flatlistKeyExtractor = (item: Character) => `${item.id}`;
 
-const renderFlatList = ({ item }: { item: Book }) => {
-  return <ListItem id={item.id} title={item.title} />;
+const renderFlatList = ({ item }: { item: Character }) => {
+  return <ListItem id={item.id} name={item.name} />;
 };
 
-const HomeScreen = () => {
-  const [books, setBooks] = useState<Book[]>([]);
+const CharacterListScreen = () => {
+  const [characters, setCharacters] = useState<Character[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   const netInfo = useNetInfo();
 
   console.log('isConnected', netInfo.isConnected);
 
-  const getBookData = async () => {
+  const getCharacterData = async () => {
     try {
-      const { success, data } = await getAllBooks();
+      const { success, data } = await getAllCharacters();
       if (success) {
-        setBooks(data);
+        setCharacters(data);
       } else {
-        Alert.alert('Error getting books from Home Screen');
+        Alert.alert('Error getting characters from Character List Screen');
       }
     } catch (error) {
-      console.log('Error getting books on HomeScreen', error);
-      Alert.alert('Error getting books from Home Screen');
+      console.log('Error getting characters on CharacterListScreen', error);
+      Alert.alert('Error getting characters from Character List Screen');
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    getBookData();
+    getCharacterData();
   }, []);
 
   if (!netInfo.isConnected) {
@@ -65,19 +65,17 @@ const HomeScreen = () => {
     );
   }
 
-  console.log('Inside HomeScreen');
+  console.log('Inside CharacterListScreen');
 
   return (
     <>
-      <Header showBackButton={false} title="Home Screen" />
+      <Header showBackButton={false} title="Character List" />
       <View style={styles.mainContainer}>
-        <DefaultButton text="Go to experimental screen" textSize={16} onPress={goToExperimentalScreen} />
-        <Separator />
         <FlatList
           keyExtractor={flatlistKeyExtractor}
           refreshing={loading}
-          onRefresh={getBookData}
-          data={books}
+          onRefresh={getCharacterData}
+          data={characters}
           renderItem={renderFlatList}
           ItemSeparatorComponent={Separator}
           contentContainerStyle={styles.flatlistConteiner}
@@ -88,4 +86,4 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default CharacterListScreen;

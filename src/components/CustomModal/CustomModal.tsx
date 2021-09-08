@@ -1,12 +1,13 @@
 import React from 'react';
-import {Modal, View} from 'react-native';
+import { Image, Modal, View } from 'react-native';
 import CustomText from '../CustomText';
 import DefaultButton from '../DefaultButton';
 import Separator from '../Separator';
 import styles from './styles';
 
 interface Props {
-  message: string;
+  message?: string;
+  image?: string;
   onPressPrimary: () => void;
   primaryButtonText: string;
   onPressSecondary?: () => void;
@@ -16,6 +17,7 @@ interface Props {
 
 const CustomModal = ({
   message,
+  image,
   onPressPrimary,
   primaryButtonText,
   onPressSecondary,
@@ -26,15 +28,15 @@ const CustomModal = ({
     <Modal animationType="fade" transparent visible={visible}>
       <View style={styles.mainContainer}>
         <View style={styles.innerAlert}>
-          <CustomText size={18} variant="italic">
-            {message}
-          </CustomText>
+          {image ? (
+            <Image source={{ uri: image }} style={styles.image} resizeMode="contain" />
+          ) : (
+            <CustomText size={18} variant="italic">
+              {message}
+            </CustomText>
+          )}
           <Separator size={10} />
-          <DefaultButton
-            onPress={onPressPrimary}
-            text={primaryButtonText}
-            additionalStyle={styles.button}
-          />
+          <DefaultButton onPress={onPressPrimary} text={primaryButtonText} additionalStyle={styles.button} />
           {secondaryButtonText && onPressSecondary ? (
             <>
               <Separator size={10} />

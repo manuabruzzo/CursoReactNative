@@ -1,5 +1,6 @@
-import {StyleSheet} from 'react-native';
-import {colors} from '../../utils/theme';
+import { StyleSheet } from 'react-native';
+import { DEVICE_WIDTH } from '../../utils/dimensions';
+import { colors } from '../../utils/theme';
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -8,6 +9,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     width: '100%',
+  },
+  image: {
+    aspectRatio: 1,
+    borderRadius: 5,
+    minHeight: 50,
+    width: DEVICE_WIDTH * 0.8,
   },
   innerAlert: {
     alignItems: 'center',

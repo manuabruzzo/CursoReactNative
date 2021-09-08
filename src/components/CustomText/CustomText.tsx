@@ -44,9 +44,12 @@ const spaceLetters = (text: any, space: number) => {
 
 const CustomText = ({ align, children, color, numberOfLines, size, space, variant }: Props) => {
   const textStyle = getTextStyle({ align, color, size, variant });
+  if (space > 0) {
+    children = spaceLetters(children, space);
+  }
   return (
     <Text allowFontScaling={false} style={textStyle} numberOfLines={numberOfLines}>
-      {spaceLetters(children, space)}
+      {children}
     </Text>
   );
 };

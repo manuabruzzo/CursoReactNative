@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { DefaultButton, Separator, CustomText } from '../../components';
-import { goToScreen, replaceRoute } from '../../navigation/controls';
+import { replaceRoute } from '../../navigation/controls';
 import styles from './styles';
 
 const goToMainTabs = async () => {
@@ -13,10 +13,6 @@ const goToMainTabs = async () => {
   } catch (error) {
     console.log('Error storing userLoggedFlag', 'true');
   }
-};
-
-const goToExperimentalScreen = () => {
-  goToScreen('Experimental');
 };
 
 const checkIfUserIsLoggedIn = async () => {
@@ -43,13 +39,6 @@ const WelcomeScreen = () => {
       </CustomText>
       <Separator size={15} />
       <DefaultButton text="Go to Tabs" textSize={16} onPress={goToMainTabs} />
-      <Separator />
-      <DefaultButton
-        text="Go To Experimental Screen"
-        textSize={16}
-        onPress={goToExperimentalScreen}
-        variant="secondary"
-      />
     </View>
   );
 };

@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {colors} from '../../utils/theme';
+import { StyleSheet } from 'react-native';
+import { colors } from '../../utils/theme';
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -19,6 +19,10 @@ const styles = StyleSheet.create({
   secondary: {
     backgroundColor: colors.white,
     borderColor: colors.primary,
+  },
+  small: {
+    height: 40,
+    width: '30%',
   },
 });
 

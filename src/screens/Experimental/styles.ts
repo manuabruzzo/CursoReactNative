@@ -1,7 +1,7 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
-import {DEVICE_WIDTH} from '../../utils/dimensions';
-import {colors} from '../../utils/theme';
+import { DEVICE_WIDTH } from '../../utils/dimensions';
+import { colors } from '../../utils/theme';
 
 const styles = StyleSheet.create({
   horizontalContainer: {

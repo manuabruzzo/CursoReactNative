@@ -7,14 +7,18 @@ import styles, { buttonTextColors } from './styles';
 interface Props {
   additionalStyle?: ViewStyle;
   onPress: () => void;
-  text: string;
+  small?: boolean;
+  text?: string;
   textSize?: number;
   variant?: 'primary' | 'secondary';
 }
 
-const DefaultButton = ({ additionalStyle, onPress, text, textSize, variant = 'primary' }: Props) => {
+const DefaultButton = ({ additionalStyle, small, onPress, text, textSize, variant = 'primary' }: Props) => {
   return (
-    <TouchableOpacity style={[styles.mainContainer, styles[variant], additionalStyle]} onPress={onPress}>
+    <TouchableOpacity
+      style={[styles.mainContainer, styles[variant], additionalStyle, small ? styles.small : null]}
+      onPress={onPress}
+    >
       <CustomText color={buttonTextColors[variant]} size={textSize}>
         {text}
       </CustomText>

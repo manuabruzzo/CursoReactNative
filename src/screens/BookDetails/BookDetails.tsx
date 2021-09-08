@@ -4,8 +4,8 @@ import { ActivityIndicator, Alert, ScrollView, View } from 'react-native';
 import { getBookById } from '../../services';
 import { CustomText, Header, Separator } from '../../components';
 import { colors } from '../../utils/theme';
-import { Book } from 'types';
 import styles from './styles';
+import { Book, Convert } from '../../types/Book';
 
 const BookDetailsScreen = ({ route }: { route: any }) => {
   const { id, title } = route.params;
@@ -13,17 +13,17 @@ const BookDetailsScreen = ({ route }: { route: any }) => {
   const [book, setBook] = useState<Book | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const getBooksData = async () => {
+  const getBookData = async () => {
     setLoading(true);
     try {
       const { success, data } = await getBookById(id);
       if (success) {
-        setBook(data);
+        setBook(Convert.toBook(JSON.stringify(data))[0]);
       } else {
         Alert.alert(`Error getting the details of the book ${title}`);
       }
     } catch (error) {
-      console.log(`Error getting book with id: ${id} in BookDetailsScreen`, error);
+      console.log(`Error getting book with id ${id} in BookDetailsScreen`, error);
       Alert.alert(`Error getting the details of the book: ${title}`);
     } finally {
       setLoading(false);
@@ -31,7 +31,7 @@ const BookDetailsScreen = ({ route }: { route: any }) => {
   };
 
   useEffect(() => {
-    getBooksData();
+    getBookData();
   }, []);
 
   if (loading) {
@@ -50,10 +50,43 @@ const BookDetailsScreen = ({ route }: { route: any }) => {
       <Header title={title} />
       <View style={styles.mainContainer}>
         {/* <Separator size={40} /> */}
-        <CustomText>Book Details</CustomText>
         <Separator />
         <ScrollView>
-          <CustomText>{JSON.stringify(book, null, 2)}</CustomText>
+          <CustomText align="left" size={18} variant="bold">
+            Title
+          </CustomText>
+          <CustomText align="left" size={16}>
+            {book?.title}
+          </CustomText>
+          <Separator />
+          <CustomText align="left" size={18} variant="bold">
+            Author
+          </CustomText>
+          <CustomText align="left" size={16}>
+            {book?.author}
+          </CustomText>
+          <Separator />
+          <CustomText align="left" size={18} variant="bold">
+            Publish date
+          </CustomText>
+          {book?.publishDate[0].uk && (
+            <CustomText align="left" size={16}>
+              United Kingdom: {book?.publishDate[0].uk}
+            </CustomText>
+          )}
+          {book?.publishDate[1].us && (
+            <CustomText align="left" size={16}>
+              United States: {book?.publishDate[1].us}
+            </CustomText>
+          )}
+          <Separator />
+          <CustomText align="left" size={18} variant="bold">
+            Context years
+          </CustomText>
+          <CustomText align="left" size={16}>
+            {book?.plotTakePlaceYears.join(', ')}
+          </CustomText>
+          <Separator />
         </ScrollView>
       </View>
     </>

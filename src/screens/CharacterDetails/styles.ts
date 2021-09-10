@@ -2,10 +2,10 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   mainContainer: {
-    alignItems: 'center',
+    alignContent: 'center',
     flex: 1,
-    justifyContent: 'flex-start',
-    width: '100%',
+    width: '85%',
+    marginLeft: 30,
   },
   horizontalContainer: {
     flexDirection: 'row',

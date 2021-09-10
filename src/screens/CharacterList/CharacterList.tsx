@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { Alert, FlatList, TouchableOpacity, View } from 'react-native';
+import React, { useState } from 'react';
+import { FlatList, TouchableOpacity, View } from 'react-native';
 import { useNetInfo } from '@react-native-community/netinfo';
 
 import { goToScreen } from '../../navigation/controls';
-import { CustomText, Header, Separator } from '../../components';
+import { CustomText, DefaultButton, Header, Separator } from '../../components';
 import styles from './styles';
-import { getAllCharacters } from '../../services';
 import { Character } from '../../types/Character';
+import useCharactersData from './hooks/useCharactersData';
 
 const ListItem = ({ id, name }: { id: number; name: string }) => {
   return (
@@ -30,37 +30,27 @@ const renderFlatList = ({ item }: { item: Character }) => {
 };
 
 const CharacterListScreen = () => {
-  const [characters, setCharacters] = useState<Character[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [refreshFlag, setRefreshFlag] = useState<boolean>(false);
+  const { characters, loading, errorOcurred } = useCharactersData(refreshFlag);
 
   const netInfo = useNetInfo();
 
   console.log('isConnected', netInfo.isConnected);
 
-  const getCharacterData = async () => {
-    try {
-      const { success, data } = await getAllCharacters();
-      if (success) {
-        setCharacters(data);
-      } else {
-        Alert.alert('Error getting characters from Character List Screen');
-      }
-    } catch (error) {
-      console.log('Error getting characters on CharacterListScreen', error);
-      Alert.alert('Error getting characters from Character List Screen');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getCharacterData();
-  }, []);
-
   if (!netInfo.isConnected) {
     return (
       <View style={styles.wholeScreenCenter}>
         <CustomText variant="bold">You don't have internet :'(</CustomText>
+      </View>
+    );
+  }
+
+  if (errorOcurred) {
+    return (
+      <View style={styles.wholeScreenCenter}>
+        <CustomText variant="bold">An unknown error ocurred ☹️</CustomText>
+        <Separator size={30} />
+        <DefaultButton text="Retry" textSize={20} onPress={() => setRefreshFlag(!refreshFlag)} />
       </View>
     );
   }
@@ -74,7 +64,7 @@ const CharacterListScreen = () => {
         <FlatList
           keyExtractor={flatlistKeyExtractor}
           refreshing={loading}
-          onRefresh={getCharacterData}
+          onRefresh={() => setRefreshFlag(!refreshFlag)}
           data={characters}
           renderItem={renderFlatList}
           ItemSeparatorComponent={Separator}

@@ -1,37 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, ScrollView, View } from 'react-native';
+import React, { useState } from 'react';
+import { ActivityIndicator, ScrollView, View } from 'react-native';
 import { colors } from '../../utils/theme';
-import { CustomText, Header, Separator } from '../../components';
-import { getCharacterById } from '../../services';
-import { Character, Convert } from '../../types/Character';
+import { CustomText, DefaultButton, Header, Separator } from '../../components';
 import styles from './styles';
+import useCharacterData from './hooks/useCharacterData';
 
 const CharacterDetailsScreen = ({ route }: { route: any }) => {
   const { id, name } = route.params;
-
-  const [character, setCharacter] = useState<Character | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  const getCharacterData = async () => {
-    setLoading(true);
-    try {
-      const { success, data } = await getCharacterById(id);
-      if (success) {
-        setCharacter(Convert.toCharacter(JSON.stringify(data))[0]);
-      } else {
-        Alert.alert(`Error getting the details of the character ${name}`);
-      }
-    } catch (error) {
-      console.log(`Error getting character with id ${id} in CharacterDetailsScreen`, error);
-      Alert.alert(`Error getting the details of the character: ${name}`);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getCharacterData();
-  }, []);
+  const [refreshFlag, setRefreshFlag] = useState<boolean>(false);
+  const { character, loading, errorOcurred } = useCharacterData(refreshFlag, id);
 
   if (loading) {
     return (
@@ -41,6 +18,16 @@ const CharacterDetailsScreen = ({ route }: { route: any }) => {
           <ActivityIndicator size="large" color={colors.primary} />
         </View>
       </>
+    );
+  }
+
+  if (errorOcurred) {
+    return (
+      <View style={styles.wholeScreenCenter}>
+        <CustomText variant="bold">An unknown error ocurred ☹️</CustomText>
+        <Separator size={30} />
+        <DefaultButton text="Retry" textSize={20} onPress={() => setRefreshFlag(!refreshFlag)} />
+      </View>
     );
   }
 
@@ -56,6 +43,14 @@ const CharacterDetailsScreen = ({ route }: { route: any }) => {
           </CustomText>
           <CustomText align="left" size={16}>
             {character?.name}
+          </CustomText>
+          <Separator />
+
+          <CustomText align="left" size={18} variant="bold">
+            Species
+          </CustomText>
+          <CustomText align="left" size={16}>
+            {character?.species}
           </CustomText>
           <Separator />
 

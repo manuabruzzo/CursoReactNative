@@ -1,38 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, ScrollView, View } from 'react-native';
+import React, { useState } from 'react';
+import { ActivityIndicator, ScrollView, View } from 'react-native';
 
-import { getBookById } from '../../services';
-import { CustomText, Header, Separator } from '../../components';
+import { CustomText, DefaultButton, Header, Separator } from '../../components';
 import { colors } from '../../utils/theme';
 import styles from './styles';
-import { Book, Convert } from '../../types/Book';
+import useBookData from './hooks/useBookData';
 
 const BookDetailsScreen = ({ route }: { route: any }) => {
   const { id, title } = route.params;
-
-  const [book, setBook] = useState<Book | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  const getBookData = async () => {
-    setLoading(true);
-    try {
-      const { success, data } = await getBookById(id);
-      if (success) {
-        setBook(Convert.toBook(JSON.stringify(data))[0]);
-      } else {
-        Alert.alert(`Error getting the details of the book ${title}`);
-      }
-    } catch (error) {
-      console.log(`Error getting book with id ${id} in BookDetailsScreen`, error);
-      Alert.alert(`Error getting the details of the book: ${title}`);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getBookData();
-  }, []);
+  const [refreshFlag, setRefreshFlag] = useState<boolean>(false);
+  const { book, loading, errorOcurred } = useBookData(refreshFlag, id);
 
   if (loading) {
     return (
@@ -42,6 +19,16 @@ const BookDetailsScreen = ({ route }: { route: any }) => {
           <ActivityIndicator size="large" color={colors.primary} />
         </View>
       </>
+    );
+  }
+
+  if (errorOcurred) {
+    return (
+      <View style={styles.wholeScreenCenter}>
+        <CustomText variant="bold">An unknown error ocurred ☹️</CustomText>
+        <Separator size={30} />
+        <DefaultButton text="Retry" textSize={20} onPress={() => setRefreshFlag(!refreshFlag)} />
+      </View>
     );
   }
 

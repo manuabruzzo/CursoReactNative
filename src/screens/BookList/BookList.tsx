@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { Alert, FlatList, TouchableOpacity, View } from 'react-native';
+import React, { useCallback, useState } from 'react';
+import { FlatList, TouchableOpacity, View } from 'react-native';
 import { useNetInfo } from '@react-native-community/netinfo';
 
 import { goToScreen } from '../../navigation/controls';
-import { CustomText, Header, Separator } from '../../components';
+import { CustomText, DefaultButton, Header, Separator } from '../../components';
 import styles from './styles';
-import { getAllBooks } from '../../services';
 import { Book } from '../../types/Book';
+import useBooksData from './hooks/useBooksData';
 
 const ListItem = ({ id, title }: { id: number; title: string }) => {
   return (
@@ -27,37 +27,30 @@ const renderFlatList = ({ item }: { item: Book }) => {
 };
 
 const BookListScreen = () => {
-  const [books, setBooks] = useState<Book[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [refreshFlag, setRefreshFlag] = useState<boolean>(false);
+  const { books, loading, errorOcurred } = useBooksData(refreshFlag);
 
   const netInfo = useNetInfo();
 
-  console.log('isConnected', netInfo.isConnected);
-
-  const getBookData = async () => {
-    try {
-      const { success, data } = await getAllBooks();
-      if (success) {
-        setBooks(data);
-      } else {
-        Alert.alert('Error getting books from Book List Screen');
-      }
-    } catch (error) {
-      console.log('Error getting books on BookListScreen', error);
-      Alert.alert('Error getting books from Book List Screen');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getBookData();
-  }, []);
+  //This useCallback is unnecessary, is just a hook use example
+  const toogleRefreshFlag = useCallback(() => {
+    setRefreshFlag(!refreshFlag);
+  }, [refreshFlag]);
 
   if (!netInfo.isConnected) {
     return (
       <View style={styles.wholeScreenCenter}>
-        <CustomText variant="bold">You don't have internet :'(</CustomText>
+        <CustomText variant="bold">You don't have internet ☹️</CustomText>
+      </View>
+    );
+  }
+
+  if (errorOcurred) {
+    return (
+      <View style={styles.wholeScreenCenter}>
+        <CustomText variant="bold">An unknown error ocurred ☹️</CustomText>
+        <Separator size={30} />
+        <DefaultButton text="Retry" textSize={20} onPress={toogleRefreshFlag} />
       </View>
     );
   }
@@ -71,7 +64,7 @@ const BookListScreen = () => {
         <FlatList
           keyExtractor={flatlistKeyExtractor}
           refreshing={loading}
-          onRefresh={getBookData}
+          onRefresh={toogleRefreshFlag}
           data={books}
           renderItem={renderFlatList}
           ItemSeparatorComponent={Separator}

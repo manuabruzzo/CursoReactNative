@@ -8,6 +8,7 @@ import { CustomText, DefaultButton, Header, Separator } from '../../components';
 import styles from './styles';
 import { Character } from '../../types/Character';
 import useCharactersData from './hooks/useCharactersData';
+import { colors } from '../../utils/theme';
 
 const ListItem = ({ id, name }: { id: number; name: string }) => {
   return (
@@ -69,13 +70,18 @@ const CharacterListScreen = () => {
             allowFontScaling={false}
             autoCapitalize="none"
             autoCorrect={false}
-            placeholder="Search book"
+            placeholder="Search a character..."
+            placeholderTextColor={colors.red}
             value={inputText}
             // onChangeText={(text) => setInputText(text)}
             onChangeText={setInputText}
             style={styles.textInput}
           />
         </View>
+        <Separator />
+        <CustomText color={colors.red} variant="bold" size={25}>
+          CHARACTERS
+        </CustomText>
         <Separator />
         <FlatList
           keyExtractor={flatlistKeyExtractor}

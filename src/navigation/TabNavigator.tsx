@@ -33,12 +33,20 @@ const getIconName = (routeName: string) => {
 const navigatorScreenOptions = ({ route }: { route: Route }) => ({
   tabBarIcon: ({ focused, color, size }: { focused: boolean; color: string; size: number }) => {
     const iconName = getIconName(route.name);
-    const iconSize = focused ? size * 1.2 : size;
+    // const iconSize = focused ? size * 1.2 : size;
+    const iconSize = focused ? size : size;
     return <MaterialIcon name={iconName} size={iconSize} color={color} />;
   },
   tabBarallowFontScaling: false,
-  tabBarActiveTintColor: colors.primary,
-  tabBarInactiveTintColor: colors.background,
+  tabBarActiveTintColor: colors.red,
+  tabBarActiveBackgroundColor: colors.yellow,
+  tabBarInactiveTintColor: colors.yellow,
+  tabBarBackgroundColor: colors.red,
+
+  tabBarStyle: {
+    backgroundColor: colors.red,
+    paddingTop: 3,
+  },
   tabBarLabelStyle: {
     fontSize: 16,
   },

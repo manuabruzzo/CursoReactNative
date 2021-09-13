@@ -4,8 +4,8 @@ import { colors } from '../../utils/theme';
 const styles = StyleSheet.create({
   mainContainer: {
     alignItems: 'center',
-    backgroundColor: colors.background,
-    borderColor: colors.primary,
+    backgroundColor: colors.red,
+    borderColor: colors.red,
     borderRadius: 10,
     borderWidth: 1,
     justifyContent: 'center',
@@ -13,12 +13,12 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   primary: {
-    backgroundColor: colors.primary,
-    borderColor: colors.primary,
+    backgroundColor: colors.red,
+    borderColor: colors.red,
   },
   secondary: {
-    backgroundColor: colors.white,
-    borderColor: colors.primary,
+    backgroundColor: colors.yellow,
+    borderColor: colors.red,
   },
   small: {
     height: 40,
@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
 });
 
 export const buttonTextColors = {
-  primary: colors.white,
-  secondary: colors.primary,
+  primary: colors.yellow,
+  secondary: colors.red,
 };
 
 export default styles;

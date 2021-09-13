@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { FlatList, TextInput, TouchableOpacity, View } from 'react-native';
+import { FlatList, TouchableOpacity, View } from 'react-native';
 import { useNetInfo } from '@react-native-community/netinfo';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 import { goToScreen } from '../../navigation/controls';
-import { CustomText, DefaultButton, Header, Separator } from '../../components';
+import { CustomText, DefaultButton, Header, SearchBox, Separator } from '../../components';
 import styles from './styles';
 import { Character } from '../../types/Character';
 import useCharactersData from './hooks/useCharactersData';
@@ -64,20 +63,7 @@ const CharacterListScreen = () => {
     <>
       <Header showBackButton={false} title="Character List" />
       <View style={styles.mainContainer}>
-        <View style={styles.searchboxContainer}>
-          <MaterialIcon name="search" size={30} style={styles.icon} allowFontScaling={false} selectable={false} />
-          <TextInput
-            allowFontScaling={false}
-            autoCapitalize="none"
-            autoCorrect={false}
-            placeholder="Search a character..."
-            placeholderTextColor={colors.red}
-            value={inputText}
-            // onChangeText={(text) => setInputText(text)}
-            onChangeText={setInputText}
-            style={styles.textInput}
-          />
-        </View>
+        <SearchBox placeholder="Search a character..." inputText={inputText} setInputText={setInputText} />
         <Separator />
         <CustomText color={colors.red} variant="bold" size={25}>
           CHARACTERS

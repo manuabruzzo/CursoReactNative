@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { FlatList, TouchableOpacity, View } from 'react-native';
+import { FlatList, TextInput, TouchableOpacity, View } from 'react-native';
 import { useNetInfo } from '@react-native-community/netinfo';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 import { goToScreen } from '../../navigation/controls';
 import { CustomText, DefaultButton, Header, Separator } from '../../components';
@@ -31,7 +32,8 @@ const renderFlatList = ({ item }: { item: Character }) => {
 
 const CharacterListScreen = () => {
   const [refreshFlag, setRefreshFlag] = useState<boolean>(false);
-  const { characters, loading, errorOcurred } = useCharactersData(refreshFlag);
+  const [inputText, setInputText] = useState<string>('');
+  const { characters, loading, errorOcurred } = useCharactersData(refreshFlag, inputText);
 
   const netInfo = useNetInfo();
 
@@ -61,6 +63,20 @@ const CharacterListScreen = () => {
     <>
       <Header showBackButton={false} title="Character List" />
       <View style={styles.mainContainer}>
+        <View style={styles.searchboxContainer}>
+          <MaterialIcon name="search" size={30} style={styles.icon} allowFontScaling={false} selectable={false} />
+          <TextInput
+            allowFontScaling={false}
+            autoCapitalize="none"
+            autoCorrect={false}
+            placeholder="Search book"
+            value={inputText}
+            // onChangeText={(text) => setInputText(text)}
+            onChangeText={setInputText}
+            style={styles.textInput}
+          />
+        </View>
+        <Separator />
         <FlatList
           keyExtractor={flatlistKeyExtractor}
           refreshing={loading}

@@ -1,2 +1,2 @@
-export { getBookById, getAllBooks } from './books';
-export { getCharacterById, getAllCharacters } from './characters';
+export { getAllBooks, getBookById, getBookBySearch } from './books';
+export { getAllCharacters, getCharacterById, getCharacterBySearch } from './characters';

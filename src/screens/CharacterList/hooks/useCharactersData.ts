@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Character } from '../../../types/Character';
-import { getAllCharacters } from '../../../services';
+import { getAllCharacters, getCharacterBySearch } from '../../../services';
 
-function useCharactersData(refreshFlag: boolean) {
+function useCharactersData(refreshFlag: boolean, param: string) {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [errorOcurred, setErrorOcurred] = useState<boolean>(false);
@@ -24,6 +24,28 @@ function useCharactersData(refreshFlag: boolean) {
       setLoading(false);
     }
   };
+
+  const getCharacterSearch = async () => {
+    setLoading(true);
+    setErrorOcurred(false);
+    try {
+      const { success, data } = await getCharacterBySearch(param);
+      if (success) {
+        setCharacters(data);
+      } else {
+        setErrorOcurred(true);
+      }
+    } catch (error) {
+      console.log('Error getting characters on CharacterListScreen', error);
+      setErrorOcurred(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getCharacterSearch();
+  }, [param]);
 
   useEffect(() => {
     getCharacterData();

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Book } from '../../../types/Book';
-import { getAllBooks } from '../../../services';
+import { getAllBooks, getBookBySearch } from '../../../services';
 
-function useBooksData(refreshFlag: boolean) {
+function useBooksData(refreshFlag: boolean, param: string) {
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [errorOcurred, setErrorOcurred] = useState<boolean>(false);
@@ -26,6 +26,30 @@ function useBooksData(refreshFlag: boolean) {
       setLoading(false);
     }
   };
+
+  const getBookSearch = async () => {
+    setLoading(true);
+    setErrorOcurred(false);
+    try {
+      const { success, data } = await getBookBySearch(param);
+      if (success) {
+        setBooks(data);
+      } else {
+        setErrorOcurred(true);
+        // Alert.alert('Error getting books from Book List Screen');
+      }
+    } catch (error) {
+      console.log('Error getting books on BookListScreen', error);
+      setErrorOcurred(true);
+      // Alert.alert('Error getting books from Book List Screen');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getBookSearch();
+  }, [param]);
 
   useEffect(() => {
     getBookData();

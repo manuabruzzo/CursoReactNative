@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { DEVICE_WIDTH } from '../../utils/dimensions';
 import { colors } from '../../utils/theme';
 
 const styles = StyleSheet.create({
@@ -41,6 +42,23 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     width: '100%',
+  },
+  searchboxContainer: {
+    alignContent: 'center',
+    backgroundColor: 'white',
+    borderRadius: 50,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    width: DEVICE_WIDTH * 0.9,
+  },
+  icon: {
+    paddingTop: 11,
+    paddingLeft: 15,
+  },
+  textInput: {
+    height: 50,
+    paddingHorizontal: 10,
+    width: '85%',
   },
 });
 

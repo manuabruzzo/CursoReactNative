@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { DEVICE_WIDTH } from '../../utils/dimensions';
 import { colors } from '../../utils/theme';
 
 const styles = StyleSheet.create({
@@ -19,7 +20,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     // overflow: 'visible',
     paddingHorizontal: 20,
-    width: '100%',
+    width: DEVICE_WIDTH * 0.45,
   },
   listItemContainerShadow: {
     // backgroundColor: '#000', // invisible color

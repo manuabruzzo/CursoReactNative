@@ -61,7 +61,7 @@ const CharacterListScreen = () => {
 
   return (
     <>
-      <Header showBackButton={false} title="Character List" />
+      <Header />
       <View style={styles.mainContainer}>
         <SearchBox placeholder="Search a character..." inputText={inputText} setInputText={setInputText} />
         <Separator />
@@ -74,6 +74,7 @@ const CharacterListScreen = () => {
           refreshing={loading}
           onRefresh={() => setRefreshFlag(!refreshFlag)}
           data={characters}
+          numColumns={2}
           renderItem={renderFlatList}
           ItemSeparatorComponent={Separator}
           contentContainerStyle={styles.flatlistConteiner}

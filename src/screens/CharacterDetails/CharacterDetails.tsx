@@ -6,16 +6,16 @@ import styles from './styles';
 import useCharacterData from './hooks/useCharacterData';
 
 const CharacterDetailsScreen = ({ route }: { route: any }) => {
-  const { id, name } = route.params;
+  const { id } = route.params;
   const [refreshFlag, setRefreshFlag] = useState<boolean>(false);
   const { character, loading, errorOcurred } = useCharacterData(refreshFlag, id);
 
   if (loading) {
     return (
       <>
-        <Header title={name} />
+        <Header />
         <View style={styles.wholeScreenCenter}>
-          <ActivityIndicator size="large" color={colors.primary} />
+          <ActivityIndicator size="large" color={colors.red} />
         </View>
       </>
     );
@@ -33,7 +33,7 @@ const CharacterDetailsScreen = ({ route }: { route: any }) => {
 
   return (
     <>
-      <Header title={name} />
+      <Header />
       <View style={styles.mainContainer}>
         {/* <Separator size={40} /> */}
         <Separator />

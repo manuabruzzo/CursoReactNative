@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     // overflow: 'visible',
     paddingHorizontal: 20,
-    width: '100%',
+    width: DEVICE_WIDTH * 0.45,
   },
   listItemContainerShadow: {
     // backgroundColor: '#000', // invisible color

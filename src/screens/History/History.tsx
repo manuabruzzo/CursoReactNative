@@ -21,7 +21,7 @@ const logOut = async () => {
 const HistoryScreen = () => {
   return (
     <>
-      <Header showBackButton={false} title="History" />
+      <Header />
       <View style={styles.mainContainer}>
         <DefaultButton
           text="Go to experimental screen"

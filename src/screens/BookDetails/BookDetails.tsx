@@ -14,9 +14,9 @@ const BookDetailsScreen = ({ route }: { route: any }) => {
   if (loading) {
     return (
       <>
-        <Header title={title} />
+        <Header />
         <View style={styles.wholeScreenCenter}>
-          <ActivityIndicator size="large" color={colors.primary} />
+          <ActivityIndicator size="large" color={colors.red} />
         </View>
       </>
     );
@@ -34,7 +34,7 @@ const BookDetailsScreen = ({ route }: { route: any }) => {
 
   return (
     <>
-      <Header title={title} />
+      <Header />
       <View style={styles.mainContainer}>
         {/* <Separator size={40} /> */}
         <Separator />

@@ -61,7 +61,7 @@ const BookListScreen = () => {
 
   return (
     <>
-      <Header showBackButton={false} title="Book List" />
+      <Header />
       <View style={styles.mainContainer}>
         <SearchBox placeholder="Search a book..." inputText={inputText} setInputText={setInputText} />
         <Separator />
@@ -74,6 +74,7 @@ const BookListScreen = () => {
           refreshing={loading}
           onRefresh={toogleRefreshFlag}
           data={books}
+          numColumns={2}
           renderItem={renderFlatList}
           ItemSeparatorComponent={Separator}
           contentContainerStyle={styles.flatlistConteiner}

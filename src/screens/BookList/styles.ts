@@ -5,10 +5,16 @@ import { colors } from '../../utils/theme';
 const styles = StyleSheet.create({
   flatList: {
     flex: 1,
-    width: '100%',
+    width: '95%',
+    alignSelf: 'center',
+    // alignItems: 'center',
+    // width: DEVICE_WIDTH * 0.95,
   },
   flatlistConteiner: {
-    paddingHorizontal: 20,
+    borderRadius: 30,
+    backgroundColor: 'white',
+    paddingHorizontal: 10,
+    paddingVertical: 20,
   },
   listItemContainer: {
     alignItems: 'center',

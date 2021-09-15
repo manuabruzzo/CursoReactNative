@@ -1,3 +1,4 @@
+export { default as Card } from './Card';
 export { default as CustomModal } from './CustomModal';
 export { default as CustomText } from './CustomText';
 export { default as DefaultButton } from './DefaultButton';

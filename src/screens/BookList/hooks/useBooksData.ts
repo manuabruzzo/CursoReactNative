@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Book } from '../../../types/Book';
+import { Book, Convert } from '../../../types/Book';
 import { getAllBooks, getBookBySearch } from '../../../services';
 
 function useBooksData(refreshFlag: boolean, param: string) {
@@ -13,7 +13,8 @@ function useBooksData(refreshFlag: boolean, param: string) {
     try {
       const { success, data } = await getAllBooks();
       if (success) {
-        setBooks(data);
+        // setBooks(data);
+        setBooks(Convert.toBook(JSON.stringify(data)));
       } else {
         setErrorOcurred(true);
         // Alert.alert('Error getting books from Book List Screen');

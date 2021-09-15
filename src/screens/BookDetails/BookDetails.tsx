@@ -7,7 +7,7 @@ import styles from './styles';
 import useBookData from './hooks/useBookData';
 
 const BookDetailsScreen = ({ route }: { route: any }) => {
-  const { id, title } = route.params;
+  const { id } = route.params;
   const [refreshFlag, setRefreshFlag] = useState<boolean>(false);
   const { book, loading, errorOcurred } = useBookData(refreshFlag, id);
 

@@ -42,7 +42,7 @@ const CharacterListScreen = () => {
   if (!netInfo.isConnected) {
     return (
       <View style={styles.wholeScreenCenter}>
-        <CustomText variant="bold">You don't have internet :'(</CustomText>
+        <CustomText variant="bold">You don't have internet ☹️</CustomText>
       </View>
     );
   }

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 // import { DEVICE_WIDTH } from '../../utils/dimensions';
-import { colors } from '../../utils/theme';
+// import { colors } from '../../utils/theme';
 
 const styles = StyleSheet.create({
   cardContainer: {
@@ -8,14 +8,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 7,
     height: 240,
     width: 170,
-    backgroundColor: colors.red,
+    backgroundColor: 'white',
+    elevation: 5,
   },
   imageFrame: {
     borderRadius: 30,
     overflow: 'hidden',
     height: 170,
     width: 170,
-    backgroundColor: colors.red,
   },
   image: {
     alignContent: 'center',

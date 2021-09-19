@@ -19,7 +19,7 @@ const Card = ({ legend, image }: Props) => {
             <Image source={{ uri: image }} style={styles.image} />
           </View>
           <Separator />
-          <CustomText numberOfLines={2} size={14} align="center" color={colors.yellow} variant="bold">
+          <CustomText numberOfLines={2} size={14} align="center" color={colors.red} variant="bold">
             {legend}
           </CustomText>
         </>
@@ -29,7 +29,7 @@ const Card = ({ legend, image }: Props) => {
             <Image source={require('../../assets/images/placeholder.png')} style={styles.placeholderImage} />
           </View>
           <Separator />
-          <CustomText numberOfLines={2} size={14} align="center" color={colors.yellow} variant="bold">
+          <CustomText numberOfLines={2} size={14} align="center" color={colors.red} variant="bold">
             {legend}
           </CustomText>
         </>

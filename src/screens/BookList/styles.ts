@@ -28,10 +28,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     width: DEVICE_WIDTH * 0.45,
   },
-  listItemContainerShadow: {
-    // backgroundColor: '#000', // invisible color
-    elevation: 20,
-  },
   loading: {
     alignItems: 'center',
     flex: 1,

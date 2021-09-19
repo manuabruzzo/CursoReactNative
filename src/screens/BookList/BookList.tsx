@@ -11,7 +11,7 @@ import { colors } from '../../utils/theme';
 
 const ListItem = ({ id, title, image }: { id: number; title: string; image: string | undefined }) => {
   return (
-    <TouchableOpacity onPress={() => goToScreen('BookDetails', { id, title })} style={styles.listItemContainerShadow}>
+    <TouchableOpacity onPress={() => goToScreen('BookDetails', { id, title })}>
       <Card legend={title} image={image} />
     </TouchableOpacity>
   );
@@ -20,8 +20,8 @@ const ListItem = ({ id, title, image }: { id: number; title: string; image: stri
 const flatlistKeyExtractor = (item: Book) => `${item.id}`;
 
 const renderFlatList = ({ item }: { item: Book }) => {
-  let covers = item.bookCovers;
-  // console.log(covers);
+  const covers = item.bookCovers;
+  console.log(covers);
   // console.log(item.bookCovers);
   return (
     <ListItem

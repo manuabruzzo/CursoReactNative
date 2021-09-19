@@ -5,28 +5,14 @@ import { colors } from '../../utils/theme';
 const styles = StyleSheet.create({
   flatList: {
     flex: 1,
-    width: '95%',
-    alignSelf: 'center',
-    // alignItems: 'center',
-    // width: DEVICE_WIDTH * 0.95,
   },
   flatlistConteiner: {
-    borderRadius: 30,
-    backgroundColor: 'white',
-    paddingHorizontal: 10,
-    paddingVertical: 20,
-  },
-  listItemContainer: {
+    alignSelf: 'center',
+    width: DEVICE_WIDTH * 0.9,
     alignItems: 'center',
+    borderRadius: 30,
     backgroundColor: colors.white,
-    borderColor: 'white',
-    borderRadius: 10,
-    borderWidth: 1,
-    height: 50,
-    justifyContent: 'center',
-    // overflow: 'visible',
-    paddingHorizontal: 20,
-    width: DEVICE_WIDTH * 0.45,
+    paddingVertical: 20,
   },
   loading: {
     alignItems: 'center',

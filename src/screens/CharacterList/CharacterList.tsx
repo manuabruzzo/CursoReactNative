@@ -11,12 +11,9 @@ import { colors } from '../../utils/theme';
 
 const ListItem = ({ id, name }: { id: number; name: string }) => {
   return (
-    <TouchableOpacity
-      onPress={() => goToScreen('CharacterDetails', { id, name })}
-      style={styles.listItemContainerShadow}
-    >
-      <View style={styles.listItemContainer}>
-        <CustomText numberOfLines={2} size={16} align="center">
+    <TouchableOpacity onPress={() => goToScreen('CharacterDetails', { id, name })}>
+      <View style={[styles.listItemContainer, styles.listItemContainerShadow]}>
+        <CustomText numberOfLines={2} size={14} align="center" variant="bold" color={colors.red}>
           {name}
         </CustomText>
       </View>

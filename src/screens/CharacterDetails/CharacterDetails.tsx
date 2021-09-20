@@ -34,67 +34,149 @@ const CharacterDetailsScreen = ({ route }: { route: any }) => {
   return (
     <>
       <Header />
-      <View style={styles.mainContainer}>
-        {/* <Separator size={40} /> */}
-        <Separator />
-        <ScrollView>
-          <CustomText align="left" size={18} variant="bold">
-            Name
-          </CustomText>
-          <CustomText align="left" size={16}>
-            {character?.name}
-          </CustomText>
-          <Separator />
-
-          <CustomText align="left" size={18} variant="bold">
-            Species
-          </CustomText>
-          <CustomText align="left" size={16}>
-            {character?.species}
-          </CustomText>
-          <Separator />
-
-          <CustomText align="left" size={18} variant="bold">
-            Gender
-          </CustomText>
-          <CustomText align="left" size={16}>
-            {character?.gender}
-          </CustomText>
-          <Separator />
-
-          <CustomText align="left" size={18} variant="bold">
-            Birth
-          </CustomText>
-          <CustomText align="left" size={16}>
-            {character?.birth}
-          </CustomText>
-          <Separator />
-
-          <CustomText align="left" size={18} variant="bold">
-            Death
-          </CustomText>
-          <CustomText align="left" size={16}>
-            {character?.death}
-          </CustomText>
-          <Separator />
-
-          <CustomText align="left" size={18} variant="bold">
-            Wand
-          </CustomText>
-          <CustomText align="left" size={16}>
-            {character?.wand}
-          </CustomText>
-          <Separator />
-
-          <CustomText align="left" size={18} variant="bold">
-            Patronus
-          </CustomText>
-          <CustomText align="left" size={16}>
-            {character?.patronus}
-          </CustomText>
-          <Separator />
-        </ScrollView>
+      <Separator />
+      <View style={styles.title}>
+        <CustomText align="center" size={25} variant="bold" color={colors.red}>
+          {character?.name}
+        </CustomText>
       </View>
+      <Separator />
+      <ScrollView>
+        <View style={styles.mainContainer}>
+          {character?.species !== null ? (
+            <>
+              <CustomText align="left" size={18} variant="bold" color={colors.red}>
+                Species
+              </CustomText>
+              <CustomText align="left" size={16}>
+                {character?.species}
+              </CustomText>
+              <Separator />
+            </>
+          ) : null}
+          {character?.ancestry !== null ? (
+            <>
+              <CustomText align="left" size={18} variant="bold" color={colors.red}>
+                Ancestry
+              </CustomText>
+              <CustomText align="left" size={16}>
+                {character?.ancestry}
+              </CustomText>
+              <Separator />
+            </>
+          ) : null}
+          {character?.gender !== null ? (
+            <>
+              <CustomText align="left" size={18} variant="bold" color={colors.red}>
+                Gender
+              </CustomText>
+              <CustomText align="left" size={16}>
+                {character?.gender}
+              </CustomText>
+              <Separator />
+            </>
+          ) : null}
+          {character?.birth !== null ? (
+            <>
+              <CustomText align="left" size={18} variant="bold" color={colors.red}>
+                Birth
+              </CustomText>
+              <CustomText align="left" size={16}>
+                {character?.birth}
+              </CustomText>
+              <Separator />
+            </>
+          ) : null}
+          {character?.death !== null ? (
+            <>
+              <CustomText align="left" size={18} variant="bold" color={colors.red}>
+                Death
+              </CustomText>
+              <CustomText align="left" size={16}>
+                {character?.death}
+              </CustomText>
+              <Separator />
+            </>
+          ) : null}
+          {character?.hairColor !== null ? (
+            <>
+              <CustomText align="left" size={18} variant="bold" color={colors.red}>
+                Hair Color
+              </CustomText>
+              <CustomText align="left" size={16}>
+                {character?.hairColor}
+              </CustomText>
+              <Separator />
+            </>
+          ) : null}
+          {character?.eyeColor !== null ? (
+            <>
+              <CustomText align="left" size={18} variant="bold" color={colors.red}>
+                Eye Color
+              </CustomText>
+              <CustomText align="left" size={16}>
+                {character?.eyeColor}
+              </CustomText>
+              <Separator />
+            </>
+          ) : null}
+          {character?.wand !== null ? (
+            <>
+              <CustomText align="left" size={18} variant="bold" color={colors.red}>
+                Wand
+              </CustomText>
+              <CustomText align="left" size={16}>
+                {character?.wand}
+              </CustomText>
+              <Separator />
+            </>
+          ) : null}
+          {character?.patronus !== null ? (
+            <>
+              <CustomText align="left" size={18} variant="bold" color={colors.red}>
+                Patronus
+              </CustomText>
+              <CustomText align="left" size={16}>
+                {character?.patronus}
+              </CustomText>
+              <Separator />
+            </>
+          ) : null}
+          {character?.house !== null ? (
+            <>
+              <CustomText align="left" size={18} variant="bold" color={colors.red}>
+                Hogwarts House
+              </CustomText>
+              <CustomText align="left" size={16}>
+                {character?.house}
+              </CustomText>
+              <Separator />
+            </>
+          ) : null}
+          {character?.associatedGroups.length > 0 ? (
+            <>
+              <CustomText align="left" size={18} variant="bold" color={colors.red}>
+                Associated Groups
+              </CustomText>
+              <CustomText align="left" size={16}>
+                {character?.associatedGroups.join(', ')}
+              </CustomText>
+              <Separator />
+            </>
+          ) : null}
+          {character?.booksFeaturedIn.length > 0 ? (
+            <>
+              <CustomText align="left" size={18} variant="bold" color={colors.red}>
+                Book Appearances
+              </CustomText>
+              <CustomText align="left" size={16}>
+                {character?.booksFeaturedIn.join(', ')}
+              </CustomText>
+              <Separator />
+            </>
+          ) : null}
+        </View>
+      </ScrollView>
     </>
   );
 };

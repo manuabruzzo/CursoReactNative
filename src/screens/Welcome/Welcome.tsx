@@ -35,10 +35,10 @@ const WelcomeScreen = () => {
   return (
     <View style={styles.mainContainer}>
       <CustomText size={20} variant="medium">
-        Welcome Screen
+        Welcome to the Harry Potter API
       </CustomText>
-      <Separator size={15} />
-      <DefaultButton text="Go to Tabs" textSize={16} onPress={goToMainTabs} />
+      <Separator size={20} />
+      <DefaultButton text="Alohomora! 🪄" textSize={20} onPress={goToMainTabs} />
     </View>
   );
 };

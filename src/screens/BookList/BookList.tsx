@@ -8,20 +8,26 @@ import styles from './styles';
 import { Book } from '../../types/Book';
 import useBooksData from './hooks/useBooksData';
 import { colors } from '../../utils/theme';
+import { addEntry } from '../../services/history';
 
 const ListItem = ({ id, title, image }: { id: number; title: string; image: string | undefined }) => {
   return (
-    <TouchableOpacity onPress={() => goToScreen('BookDetails', { id, title })}>
+    <TouchableOpacity onPress={() => goToBook(id, title)}>
       <Card legend={title} image={image} />
     </TouchableOpacity>
   );
+};
+
+const goToBook = (id: number, title: string) => {
+  goToScreen('BookDetails', { id, title });
+  addEntry(id, 'book', title);
 };
 
 const flatlistKeyExtractor = (item: Book) => `${item.id}`;
 
 const renderFlatList = ({ item }: { item: Book }) => {
   const covers = item.bookCovers;
-  console.log(covers);
+  // console.log(covers);
   // console.log(item.bookCovers);
   return (
     <ListItem
@@ -64,7 +70,7 @@ const BookListScreen = () => {
     );
   }
 
-  console.log('Inside BookListScreen');
+  // console.log('Inside BookListScreen');
 
   return (
     <>

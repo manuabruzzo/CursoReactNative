@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.red,
     borderColor: colors.red,
     borderRadius: 10,
-    borderWidth: 1,
+    borderWidth: 3,
     justifyContent: 'center',
     height: 50,
     width: '80%',
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     borderColor: colors.red,
   },
   secondary: {
-    backgroundColor: colors.yellow,
+    backgroundColor: 'white',
     borderColor: colors.red,
   },
   small: {

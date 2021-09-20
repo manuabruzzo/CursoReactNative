@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     height: '70%',
     width: '100%',
+    marginBottom: 10,
   },
   image: {
     resizeMode: 'cover',

@@ -8,10 +8,11 @@ import styles from './styles';
 import { Character } from '../../types/Character';
 import useCharactersData from './hooks/useCharactersData';
 import { colors } from '../../utils/theme';
+import { addEntry } from '../../services';
 
 const ListItem = ({ id, name }: { id: number; name: string }) => {
   return (
-    <TouchableOpacity onPress={() => goToScreen('CharacterDetails', { id, name })}>
+    <TouchableOpacity onPress={() => goToCharacter(id, name)}>
       <View style={[styles.listItemContainer, styles.listItemContainerShadow]}>
         <CustomText numberOfLines={2} size={14} align="center" variant="bold" color={colors.red}>
           {name}
@@ -19,6 +20,11 @@ const ListItem = ({ id, name }: { id: number; name: string }) => {
       </View>
     </TouchableOpacity>
   );
+};
+
+const goToCharacter = (id: number, name: string) => {
+  goToScreen('CharacterDetails', { id, name });
+  addEntry(id, 'character', name);
 };
 
 const flatlistKeyExtractor = (item: Character) => `${item.id}`;

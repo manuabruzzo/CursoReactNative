@@ -3,7 +3,7 @@ import { FlatList, TouchableOpacity, View } from 'react-native';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { CustomText, DefaultButton, Header, Separator } from '../../components';
-import { goToScreen, resetNavigation } from '../../navigation/controls';
+import { goToScreen } from '../../navigation/controls';
 import { Entry } from '../../types/Entry';
 
 import styles from './styles';
